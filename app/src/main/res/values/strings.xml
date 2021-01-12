@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">EngineerCalculator</string>
+    <string name="shift_button_text">shift</string>
+    <string name="menu_button_text">menu</string>
+    <string name="backspace_button_text">⌫</string>
+    <string name="ac_button_text">AC</string>
+    <string name="pi_button_text">π</string>
+    <string name="sin_button_text">sin</string>
+    <string name="tan_button_text">tan</string>
+    <string name="sqrt_button_text">√</string>
+    <string name="e_button_text">e</string>
+    <string name="button_1_text">1</string>
+    <string name="button_2_text">2</string>
+    <string name="button_3_text">3</string>
+    <string name="button_4_text">4</string>
+    <string name="button_5_text">5</string>
+    <string name="button_6_text">6</string>
+    <string name="button_7_text">7</string>
+    <string name="button_8_text">8</string>
+    <string name="button_9_text">9</string>
+    <string name="button_left_bracket_text">(</string>
+    <string name="button_right_bracket_text">)</string>
+    <string name="button_point_text">.</string>
+    <string name="button_plus_minus_text">+/-</string>
+    <string name="button_0_text">0</string>
 </resources>
