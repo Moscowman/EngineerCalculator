@@ -7,7 +7,6 @@
     android:background="#505050"
     tools:context=".MainActivity">
 
-
     <SurfaceView
         android:id="@+id/surfaceView"
         android:layout_width="match_parent"
@@ -19,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <Button
         android:id="@+id/button_shift"
         android:layout_width="0dp"
@@ -29,7 +27,6 @@
         android:insetLeft="3dp"
         android:insetRight="3dp"
         android:paddingLeft="4dp"
-
         android:paddingRight="4dp"
         android:text="@string/shift_button_text"
         android:textColor="@android:color/primary_text_light"
@@ -47,7 +44,6 @@
         android:backgroundTint="@color/functional_buttons_background_color"
         android:insetLeft="3dp"
         android:insetRight="3dp"
-
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:text="@string/menu_button_text"
@@ -61,7 +57,6 @@
     <Space
         android:id="@+id/space_1"
         android:layout_width="0dp"
-
         android:layout_height="20dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
@@ -75,7 +70,6 @@
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:paddingLeft="4dp"
-
         android:paddingRight="4dp"
         app:layout_constraintEnd_toStartOf="@+id/button_backspace"
         app:layout_constraintHorizontal_weight="1"
@@ -124,7 +118,6 @@
         android:textColor="@android:color/primary_text_light"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/button_7"
-
         app:layout_constraintEnd_toStartOf="@+id/button_sin"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
@@ -152,7 +145,7 @@
         android:backgroundTint="@color/functional_buttons_background_color"
         android:insetLeft="3dp"
         android:insetRight="3dp"
-        android:text="cos"
+        android:text="@string/cos_button_text"
         android:textAllCaps="false"
         android:textColor="@android:color/primary_text_light"
         app:cornerRadius="0dp"
@@ -221,7 +214,6 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="28sp"
-
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/button_4"
         app:layout_constraintEnd_toStartOf="@+id/button_8"
@@ -307,7 +299,6 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="28sp"
-
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/button_1"
         app:layout_constraintEnd_toStartOf="@+id/button_8"
@@ -354,7 +345,7 @@
         android:backgroundTint="@color/operations_buttons_background_color"
         android:insetLeft="3dp"
         android:insetRight="3dp"
-        android:text="x"
+        android:text="@string/multiply_button_text"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -371,7 +362,7 @@
         android:backgroundTint="@color/operations_buttons_background_color"
         android:insetLeft="3dp"
         android:insetRight="3dp"
-        android:text="/"
+        android:text="@string/divide_button_text"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -392,7 +383,6 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="28sp"
-
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toTopOf="@+id/button_0"
         app:layout_constraintEnd_toStartOf="@+id/button_2"
@@ -439,7 +429,7 @@
         android:backgroundTint="@color/operations_buttons_background_color"
         android:insetLeft="3dp"
         android:insetRight="3dp"
-        android:text="+"
+        android:text="@string/plus_button_text"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -456,7 +446,7 @@
         android:backgroundTint="@color/operations_buttons_background_color"
         android:insetLeft="3dp"
         android:insetRight="3dp"
-        android:text="-"
+        android:text="@string/minus_button_text"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -465,7 +455,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_plus"
         app:layout_constraintTop_toTopOf="@+id/button_plus" />
-
 
     <Button
         android:id="@+id/button_0"
@@ -543,7 +532,7 @@
         android:backgroundTint="@color/operations_buttons_background_color"
         android:insetLeft="3dp"
         android:insetRight="3dp"
-        android:text="="
+        android:text="@string/result_button_text"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -552,6 +541,4 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_plus2"
         app:layout_constraintTop_toTopOf="@+id/button_plus2" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

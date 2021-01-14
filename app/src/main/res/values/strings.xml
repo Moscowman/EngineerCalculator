@@ -23,4 +23,10 @@
     <string name="button_point_text">.</string>
     <string name="button_plus_minus_text">+/-</string>
     <string name="button_0_text">0</string>
+    <string name="cos_button_text">cos</string>
+    <string name="multiply_button_text">x</string>
+    <string name="divide_button_text">/</string>
+    <string name="plus_button_text">+</string>
+    <string name="minus_button_text">-</string>
+    <string name="result_button_text">=</string>
 </resources>
