@@ -8,10 +8,10 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    ExpressionTree<String> expressionTree = new ExpressionTree<String>(255);
-    ExpressionDrawer expressionDrawer = new ExpressionDrawer();
+    private ExpressionTree<String> expressionTree = new ExpressionTree<String>(255);
+    private ExpressionDrawer expressionDrawer = new ExpressionDrawer();
 
-    View.OnClickListener digitsListener = new View.OnClickListener() {
+    private final View.OnClickListener digitsListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Button button = (Button) v;
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    View.OnClickListener functionButtonsListener = new View.OnClickListener() {
+    private final View.OnClickListener functionButtonsListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Button button = (Button) v;
@@ -27,49 +27,49 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    View.OnClickListener buttonACListener = new View.OnClickListener() {
+    private final View.OnClickListener buttonACListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             expressionTree.clearFormula();
         }
     };
 
-    View.OnClickListener buttonPointListener = new View.OnClickListener() {
+    private final View.OnClickListener buttonPointListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             expressionTree.tryToPlacePoint();
         }
     };
 
-    View.OnClickListener buttonPlusMinusListener = new View.OnClickListener() {
+    private final View.OnClickListener buttonPlusMinusListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             expressionTree.tryToInvertSign();
         }
     };
 
-    View.OnClickListener buttonPiListener = new View.OnClickListener() {
+    private final View.OnClickListener buttonPiListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             expressionTree.addString("_pi");
         }
     };
 
-    View.OnClickListener buttonSqrtListener = new View.OnClickListener() {
+    private final View.OnClickListener buttonSqrtListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             expressionTree.addString("_sqrt");
         }
     };
 
-    View.OnClickListener buttonBackspaceListener = new View.OnClickListener() {
+    private final View.OnClickListener buttonBackspaceListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             expressionTree.backspace();
         }
     };
 
-    View.OnClickListener buttonResultListener = new View.OnClickListener() {
+    private final View.OnClickListener buttonResultListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             expressionTree.calculate();
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         initFunctionButtons();
         initOtherButtons();
     }
-    void initDigitsButtons() {
+    private void initDigitsButtons() {
         Button button0 = findViewById(R.id.button_0);
         button0.setOnClickListener(digitsListener);
         Button button1 = findViewById(R.id.button_1);
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         button_right_bracket.setOnClickListener(digitsListener);
     }
 
-    void initFunctionButtons() {
+    private void initFunctionButtons() {
         Button buttonSin = findViewById(R.id.button_sin);
         buttonSin.setOnClickListener(functionButtonsListener);
         Button buttonCos = findViewById(R.id.button_cos);
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void initOtherButtons() {
+    private void initOtherButtons() {
         Button buttonAC = findViewById(R.id.button_ac);
         buttonAC.setOnClickListener(buttonACListener);
         Button buttonPoint = findViewById(R.id.button_point);
