@@ -504,13 +504,13 @@
         android:textColor="@color/white"
         android:textSize="28sp"
         app:cornerRadius="0dp"
-        app:layout_constraintEnd_toStartOf="@+id/button_plus2"
+        app:layout_constraintEnd_toStartOf="@+id/space_3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_point"
         app:layout_constraintTop_toTopOf="@+id/button_point" />
 
     <Space
-        android:id="@+id/button_plus2"
+        android:id="@+id/space_3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/operations_buttons_background_color"
@@ -520,13 +520,13 @@
         android:textColor="@color/white"
         android:textSize="28sp"
         app:cornerRadius="0dp"
-        app:layout_constraintEnd_toStartOf="@+id/button_minus2"
+        app:layout_constraintEnd_toStartOf="@+id/button_result"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_plus_minus"
         app:layout_constraintTop_toTopOf="@+id/button_plus_minus" />
 
     <Button
-        android:id="@+id/button_minus2"
+        android:id="@+id/button_result"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/operations_buttons_background_color"
@@ -539,6 +539,6 @@
         app:cornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button_plus2"
-        app:layout_constraintTop_toTopOf="@+id/button_plus2" />
+        app:layout_constraintStart_toEndOf="@+id/space_3"
+        app:layout_constraintTop_toTopOf="@+id/space_3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
