@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="button_inset">3dp</dimen>
+    <dimen name="button_radius">0dp</dimen>
+    <dimen name="surface_height">0dp</dimen>
+    <dimen name="button_width">0dp</dimen>
+    <dimen name="big_button_text_size">28sp</dimen>
+    <dimen name="small_button_padding">4dp</dimen>
+</resources>
