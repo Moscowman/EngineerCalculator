@@ -116,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
         button_multiply.setOnClickListener(digitsListener);
         Button button_divide = findViewById(R.id.button_divide);
         button_divide.setOnClickListener(digitsListener);
-        Button button_e = findViewById(R.id.button_e);
-        button_e.setOnClickListener(digitsListener);
         Button button_left_bracket = findViewById(R.id.button_left_bracket);
         button_left_bracket.setOnClickListener(digitsListener);
         Button button_right_bracket = findViewById(R.id.button_right_bracket);
@@ -131,7 +129,8 @@ public class MainActivity extends AppCompatActivity {
         buttonCos.setOnClickListener(functionButtonsListener);
         Button buttonTan = findViewById(R.id.button_tan);
         buttonTan.setOnClickListener(functionButtonsListener);
-
+        Button button_e = findViewById(R.id.button_e);
+        button_e.setOnClickListener(digitsListener);
     }
 
     private void initOtherButtons() {
