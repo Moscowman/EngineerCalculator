@@ -7,7 +7,7 @@ import androidx.annotation.RequiresApi;
 import java.util.Stack;
 import java.util.function.Consumer;
 
-public class TreeImpl<E> implements Tree<E> {
+class TreeImpl<E> implements Tree<E> {
 
     private Node<E> root;
     private int size;

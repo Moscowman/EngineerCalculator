@@ -2,7 +2,7 @@ package ru.varasoft.engineercalculator;
 
 import android.graphics.Canvas;
 
-public class ExpressionDrawer {
+class ExpressionDrawer {
     private int x = 0;
     private int y = 0;
 
