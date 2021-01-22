@@ -12,7 +12,7 @@ class LexicalAnalyzer {
     String[] functions = {"_pi","_sin","_cos","_tan","_sqrt","_e"};
 
 
-    private final ArrayList<String> tokensArrayList = new ArrayList<>();
+    private final ArrayList<Token> tokensArrayList = new ArrayList<>();
 
 
     public LexicalAnalyzer(String inputString) {
@@ -30,7 +30,7 @@ class LexicalAnalyzer {
                     boolean found = false;
                     for (String function: functions) {
                         if (inputString.regionMatches(currentPosition, function, 0, function.length())) {
-                            tokensArrayList.add(function);
+                            tokensArrayList.add(new Token(function, currentPosition));
                             found = true;
                             currentPosition+=function.length();
                             break;
@@ -44,7 +44,7 @@ class LexicalAnalyzer {
                 case '/':
                 case '(':
                 case ')':
-                    tokensArrayList.add(inputString.substring(currentPosition,currentPosition + 1));
+                    tokensArrayList.add(new Token(inputString.substring(currentPosition,currentPosition + 1), currentPosition));
                     currentPosition++;
                     break;
                 case '0':
@@ -72,7 +72,7 @@ class LexicalAnalyzer {
                         position++;
                     }
                     if (pointsCount <= 1) {
-                        tokensArrayList.add(inputString.substring(currentPosition, position));
+                        tokensArrayList.add(new Token(inputString.substring(currentPosition, position),currentPosition));
                         currentPosition = position;
                         break;
                     } else {

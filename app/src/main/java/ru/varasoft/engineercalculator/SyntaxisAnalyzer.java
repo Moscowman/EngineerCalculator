@@ -5,12 +5,28 @@ import java.util.HashMap;
 class SyntaxisAnalyzer {
     private HashMap<String, Double> variables;
 
+    private String inputString;
+
+    private Token[] tokens;
+
     public SyntaxisAnalyzer() {
         variables = new HashMap<String, Double>();
     }
 
+    public SyntaxisAnalyzer(String inputString, Token[] tokens) {
+        this.inputString = inputString;
+        this.tokens = tokens;
+    }
+
     public void setVariable(String variableName, Double variableValue) {
         variables.put(variableName, variableValue);
+    }
+
+    public boolean checkForParenthesisAfterFunctions() {
+        for (int i = 0; i < tokens.length; i++) {
+            Token token = tokens[i];
+        }
+        return true;
     }
 
     public Double getVariable(String variableName) {
