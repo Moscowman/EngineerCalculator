@@ -1,6 +1,6 @@
 package ru.varasoft.engineercalculator;
 
-public class LexicalAnalysisException extends RuntimeException{
+class LexicalAnalysisException extends RuntimeException{
     public int position;
 
     public LexicalAnalysisException(String message, int position) {

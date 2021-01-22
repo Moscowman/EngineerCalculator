@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+class MainActivity extends AppCompatActivity {
 
     private ExpressionTree<String> expressionTree = new ExpressionTree<String>(255);
     private ExpressionDrawer expressionDrawer = new ExpressionDrawer();

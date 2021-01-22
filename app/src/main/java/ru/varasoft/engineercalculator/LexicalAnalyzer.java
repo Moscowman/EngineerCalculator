@@ -2,7 +2,7 @@ package ru.varasoft.engineercalculator;
 
 import java.util.ArrayList;
 
-public class LexicalAnalyzer {
+class LexicalAnalyzer {
     private final String inputString;
 
     public String[] getTokensArray() {

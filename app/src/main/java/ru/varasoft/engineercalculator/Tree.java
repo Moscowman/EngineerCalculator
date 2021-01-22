@@ -2,7 +2,7 @@ package ru.varasoft.engineercalculator;
 
 import java.util.function.Consumer;
 
-public interface Tree<E> {
+interface Tree<E> {
 
     boolean isEmpty();
 

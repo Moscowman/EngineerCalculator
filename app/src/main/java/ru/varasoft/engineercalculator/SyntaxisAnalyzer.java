@@ -2,10 +2,10 @@ package ru.varasoft.engineercalculator;
 
 import java.util.HashMap;
 
-public class MatchParser {
+class SyntaxisAnalyzer {
     private HashMap<String, Double> variables;
 
-    public MatchParser() {
+    public SyntaxisAnalyzer() {
         variables = new HashMap<String, Double>();
     }
 
