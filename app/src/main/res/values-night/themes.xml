@@ -13,4 +13,27 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="BigButtonStyle">
+        <item name="android:layout_width">@dimen/button_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:insetLeft">@dimen/button_inset</item>
+        <item name="android:insetRight">@dimen/button_inset</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/big_button_text_size</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="SmallButtonStyle">
+        <item name="android:layout_width">@dimen/button_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/functional_buttons_background_color</item>
+        <item name="android:insetLeft">@dimen/button_inset</item>
+        <item name="android:insetRight">@dimen/button_inset</item>
+        <item name="android:paddingLeft">@dimen/small_button_padding</item>
+        <item name="android:paddingRight">@dimen/small_button_padding</item>
+        <item name="android:textColor">@android:color/primary_text_light</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 </resources>

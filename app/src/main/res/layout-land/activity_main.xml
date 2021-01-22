@@ -13,10 +13,83 @@
         android:layout_height="@dimen/surface_height"
         android:background="@color/white"
         android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/button_shift"
+        app:layout_constraintBottom_toTopOf="@+id/button_ac"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_ac"
+        style="@style/SmallButtonStyle"
+        android:text="@string/ac_button_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintEnd_toStartOf="@+id/space_1"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/surfaceView" />
+
+    <Space
+        android:id="@+id/space_1"
+        style="@style/SmallButtonStyle"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintEnd_toStartOf="@+id/button_7"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_ac"
+        app:layout_constraintTop_toTopOf="@+id/button_ac" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_7"
+        style="@style/BigButtonStyle"
+        android:text="@string/button_7_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/button_ac"
+        app:layout_constraintEnd_toStartOf="@+id/button_8"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/space_1"
+        app:layout_constraintTop_toTopOf="@+id/button_ac" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_8"
+        style="@style/BigButtonStyle"
+        android:text="@string/button_8_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintEnd_toStartOf="@+id/button_9"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_7"
+        app:layout_constraintTop_toTopOf="@+id/button_7" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_9"
+        style="@style/BigButtonStyle"
+        android:text="@string/button_9_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintEnd_toStartOf="@+id/button_left_bracket"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_8"
+        app:layout_constraintTop_toTopOf="@+id/button_8" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_left_bracket"
+        style="@style/BigButtonStyle"
+        android:backgroundTint="@color/operations_buttons_background_color"
+        android:text="@string/button_left_bracket_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintEnd_toStartOf="@+id/button_right_bracket"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_9"
+        app:layout_constraintTop_toTopOf="@+id/button_9" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_right_bracket"
+        style="@style/BigButtonStyle"
+        android:backgroundTint="@color/operations_buttons_background_color"
+        android:text="@string/button_right_bracket_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_left_bracket"
+        app:layout_constraintTop_toTopOf="@+id/button_left_bracket" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_shift"
@@ -27,186 +100,51 @@
         app:layout_constraintBottom_toTopOf="@+id/button_pi"
         app:layout_constraintEnd_toStartOf="@+id/button_menu"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_ac" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_menu"
         style="@style/SmallButtonStyle"
         android:text="@string/menu_button_text"
         app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/space_1"
+        app:layout_constraintBottom_toBottomOf="@+id/button_shift"
+        app:layout_constraintEnd_toStartOf="@+id/button_backspace"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_shift"
         app:layout_constraintTop_toTopOf="@+id/button_shift" />
-
-    <Space
-        android:id="@+id/space_1"
-        style="@style/SmallButtonStyle"
-        app:layout_constraintEnd_toStartOf="@+id/space_2"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/button_menu"
-        app:layout_constraintTop_toTopOf="@+id/button_menu" />
-
-    <Space
-        android:id="@+id/space_2"
-        style="@style/SmallButtonStyle"
-        app:layout_constraintEnd_toStartOf="@+id/button_backspace"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/space_1"
-        app:layout_constraintTop_toTopOf="@+id/space_1" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_backspace"
         style="@style/SmallButtonStyle"
         android:text="@string/backspace_button_text"
         app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_ac"
+        app:layout_constraintBottom_toBottomOf="@+id/button_menu"
+        app:layout_constraintEnd_toStartOf="@+id/button_4"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/space_2"
-        app:layout_constraintTop_toTopOf="@+id/space_2" />
+        app:layout_constraintStart_toEndOf="@+id/button_menu"
+        app:layout_constraintTop_toTopOf="@+id/button_menu" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_ac"
-        style="@style/SmallButtonStyle"
-        android:text="@string/ac_button_text"
+        style="@style/BigButtonStyle"
+        android:id="@+id/button_4"
+        android:text="@string/button_4_text"
         app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/button_backspace"
+        app:layout_constraintEnd_toStartOf="@+id/button_5"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_backspace"
-        app:layout_constraintTop_toTopOf="@id/button_backspace" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_pi"
-        style="@style/SmallButtonStyle"
-        android:text="@string/pi_button_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintBottom_toTopOf="@+id/button_7"
-        app:layout_constraintEnd_toStartOf="@+id/button_sin"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_sin"
-        style="@style/SmallButtonStyle"
-        android:text="@string/sin_button_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_cos"
-        app:layout_constraintStart_toEndOf="@+id/button_pi"
-        app:layout_constraintTop_toTopOf="@+id/button_pi" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_cos"
-        style="@style/SmallButtonStyle"
-        android:text="@string/cos_button_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_tan"
-        app:layout_constraintStart_toEndOf="@+id/button_sin"
-        app:layout_constraintTop_toTopOf="@+id/button_sin" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_tan"
-        style="@style/SmallButtonStyle"
-        android:text="@string/tan_button_text"
-        android:textAllCaps="false"
-        android:textColor="@android:color/primary_text_light"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_sqrt"
-        app:layout_constraintStart_toEndOf="@+id/button_cos"
-        app:layout_constraintTop_toTopOf="@+id/button_cos" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_sqrt"
-        style="@style/SmallButtonStyle"
-        android:text="@string/sqrt_button_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_e"
-        app:layout_constraintStart_toEndOf="@+id/button_tan"
-        app:layout_constraintTop_toTopOf="@+id/button_tan" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_e"
-        style="@style/SmallButtonStyle"
-        android:text="@string/e_button_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_sqrt"
-        app:layout_constraintTop_toTopOf="@+id/button_sqrt" />
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_7"
-        style="@style/BigButtonStyle"
-        android:text="@string/button_7_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintBottom_toTopOf="@+id/button_4"
-        app:layout_constraintEnd_toStartOf="@+id/button_8"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_8"
-        style="@style/BigButtonStyle"
-        android:text="@string/button_8_text"
-        android:textColor="@color/white"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_9"
-        app:layout_constraintStart_toEndOf="@+id/button_7"
-        app:layout_constraintTop_toTopOf="@+id/button_7" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_9"
-        style="@style/BigButtonStyle"
-        android:text="@string/button_9_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_left_bracket"
-        app:layout_constraintStart_toEndOf="@+id/button_8"
-        app:layout_constraintTop_toTopOf="@+id/button_8" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_left_bracket"
-        style="@style/BigButtonStyle"
-        android:backgroundTint="@color/operations_buttons_background_color"
-        android:text="@string/button_left_bracket_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_right_bracket"
-        app:layout_constraintStart_toEndOf="@+id/button_9"
-        app:layout_constraintTop_toTopOf="@+id/button_9" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_right_bracket"
-        style="@style/BigButtonStyle"
-        android:backgroundTint="@color/operations_buttons_background_color"
-        android:text="@string/button_right_bracket_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_left_bracket"
-        app:layout_constraintTop_toTopOf="@+id/button_left_bracket" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_4"
-        style="@style/BigButtonStyle"
-        android:text="@string/button_4_text"
-        android:textAllCaps="false"
-        app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintBottom_toTopOf="@+id/button_1"
-        app:layout_constraintEnd_toStartOf="@+id/button_8"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/button_backspace" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_5"
         style="@style/BigButtonStyle"
         android:text="@string/button_5_text"
+        android:textColor="@color/white"
+        android:textSize="28sp"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toStartOf="@+id/button_6"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_4"
         app:layout_constraintTop_toTopOf="@+id/button_4" />
 
@@ -214,9 +152,9 @@
         android:id="@+id/button_6"
         style="@style/BigButtonStyle"
         android:text="@string/button_6_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_left_bracket"
+        app:layout_constraintEnd_toStartOf="@+id/button_multiply"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_5"
         app:layout_constraintTop_toTopOf="@+id/button_5" />
 
@@ -225,9 +163,9 @@
         style="@style/BigButtonStyle"
         android:backgroundTint="@color/operations_buttons_background_color"
         android:text="@string/multiply_button_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintEnd_toStartOf="@+id/button_right_bracket"
+        app:layout_constraintEnd_toStartOf="@+id/button_divide"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_6"
         app:layout_constraintTop_toTopOf="@+id/button_6" />
 
@@ -236,21 +174,55 @@
         style="@style/BigButtonStyle"
         android:backgroundTint="@color/operations_buttons_background_color"
         android:text="@string/divide_button_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_multiply"
         app:layout_constraintTop_toTopOf="@+id/button_multiply" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_pi"
+        style="@style/SmallButtonStyle"
+        android:text="@string/pi_button_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintBottom_toTopOf="@+id/button_tan"
+        app:layout_constraintEnd_toStartOf="@+id/button_sin"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_sin"
+        style="@style/SmallButtonStyle"
+        android:text="@string/sin_button_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/button_pi"
+        app:layout_constraintEnd_toStartOf="@+id/button_cos"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_pi"
+        app:layout_constraintTop_toTopOf="@+id/button_pi" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_cos"
+        style="@style/SmallButtonStyle"
+        android:text="@string/cos_button_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/button_sin"
+        app:layout_constraintEnd_toStartOf="@+id/button_1"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_sin"
+        app:layout_constraintTop_toTopOf="@+id/button_sin" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_1"
         style="@style/BigButtonStyle"
         android:text="@string/button_1_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
-        app:layout_constraintBottom_toTopOf="@+id/button_0"
+        app:layout_constraintBottom_toBottomOf="@+id/button_cos"
         app:layout_constraintEnd_toStartOf="@+id/button_2"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_cos"
+        app:layout_constraintTop_toTopOf="@+id/button_cos" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_2"
@@ -258,6 +230,7 @@
         android:text="@string/button_2_text"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toStartOf="@+id/button_3"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_1"
         app:layout_constraintTop_toTopOf="@+id/button_1" />
 
@@ -265,20 +238,20 @@
         android:id="@+id/button_3"
         style="@style/BigButtonStyle"
         android:text="@string/button_3_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toStartOf="@+id/button_plus"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_2"
         app:layout_constraintTop_toTopOf="@+id/button_2" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_plus"
         style="@style/BigButtonStyle"
+        android:id="@+id/button_plus"
         android:backgroundTint="@color/operations_buttons_background_color"
         android:text="@string/plus_button_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toStartOf="@+id/button_minus"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_3"
         app:layout_constraintTop_toTopOf="@+id/button_3" />
 
@@ -287,21 +260,56 @@
         style="@style/BigButtonStyle"
         android:backgroundTint="@color/operations_buttons_background_color"
         android:text="@string/minus_button_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_plus"
         app:layout_constraintTop_toTopOf="@+id/button_plus" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_0"
+        android:id="@+id/button_tan"
+        style="@style/SmallButtonStyle"
+        android:text="@string/tan_button_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/button_sqrt"
+        app:layout_constraintEnd_toStartOf="@+id/button_sqrt"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_sqrt" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_sqrt"
+        style="@style/SmallButtonStyle"
+        android:text="@string/sqrt_button_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/button_e"
+        app:layout_constraintEnd_toStartOf="@+id/button_e"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_tan"
+        app:layout_constraintTop_toTopOf="@+id/button_e" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_e"
+        style="@style/SmallButtonStyle"
+        android:text="@string/e_button_text"
+        app:cornerRadius="@dimen/button_radius"
+        app:layout_constraintBottom_toBottomOf="@+id/button_0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintEnd_toStartOf="@+id/button_0"
+        app:layout_constraintStart_toEndOf="@+id/button_sqrt"
+        app:layout_constraintTop_toTopOf="@+id/button_0" />
+
+    <com.google.android.material.button.MaterialButton
         style="@style/BigButtonStyle"
+        android:id="@+id/button_0"
+        android:layout_marginBottom="10dp"
         android:text="@string/button_0_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_point"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/button_e"
+        app:layout_constraintTop_toBottomOf="@+id/button_1" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_point"
@@ -309,6 +317,7 @@
         android:text="@string/button_point_text"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toStartOf="@+id/button_plus_minus"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_0"
         app:layout_constraintTop_toTopOf="@+id/button_0" />
 
@@ -316,16 +325,18 @@
         android:id="@+id/button_plus_minus"
         style="@style/BigButtonStyle"
         android:text="@string/button_plus_minus_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toStartOf="@+id/space_3"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_point"
         app:layout_constraintTop_toTopOf="@+id/button_point" />
 
     <Space
         android:id="@+id/space_3"
         style="@style/BigButtonStyle"
+        app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toStartOf="@+id/button_result"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/button_plus_minus"
         app:layout_constraintTop_toTopOf="@+id/button_plus_minus" />
 
@@ -334,9 +345,9 @@
         style="@style/BigButtonStyle"
         android:backgroundTint="@color/operations_buttons_background_color"
         android:text="@string/result_button_text"
-        android:textAllCaps="false"
         app:cornerRadius="@dimen/button_radius"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/space_3"
         app:layout_constraintTop_toTopOf="@+id/space_3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
