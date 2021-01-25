@@ -29,4 +29,10 @@
     <string name="plus_button_text">+</string>
     <string name="minus_button_text">-</string>
     <string name="result_button_text">=</string>
+    <string name="title_activity_settings">Настройки</string>
+
+    <!-- Preference Titles -->
+    <string name="theme_header">Тема</string>
+
+    <string name="use_black_theme_title">Использовать тёмную тему</string>
 </resources>

@@ -1,12 +1,19 @@
 package ru.varasoft.engineercalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
+
+    boolean blackTheme;
+
+    private final int REQUEST_CODE_SETTING_ACTIVITY = 1;
 
     private ExpressionTree<String> expressionTree = new ExpressionTree<String>(255);
     private ExpressionDrawer expressionDrawer = new ExpressionDrawer();
@@ -16,6 +23,14 @@ class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             Button button = (Button) v;
             expressionTree.addString(button.getText().toString());
+        }
+    };
+
+    private final View.OnClickListener buttonMenuListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent runSettings = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivityForResult(runSettings, REQUEST_CODE_SETTING_ACTIVITY);
         }
     };
 
@@ -77,16 +92,27 @@ class MainActivity extends AppCompatActivity {
         }
     };
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SETTING_ACTIVITY) {
+            recreate();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        blackTheme = prefs.getBoolean("blackTheme", false);
+        if (blackTheme) {setTheme(R.style.DarkTheme_EngineerCalculator);}
+        else {setTheme(R.style.Theme_EngineerCalculator);}
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initDigitsButtons();
         initFunctionButtons();
         initOtherButtons();
     }
+
     private void initDigitsButtons() {
         Button button0 = findViewById(R.id.button_0);
         button0.setOnClickListener(digitsListener);
@@ -148,6 +174,8 @@ class MainActivity extends AppCompatActivity {
         buttonResult.setOnClickListener(buttonResultListener);
         Button buttonBackspace = findViewById(R.id.button_backspace);
         buttonBackspace.setOnClickListener(buttonBackspaceListener);
+        Button buttonMenu = findViewById(R.id.button_menu);
+        buttonMenu.setOnClickListener(buttonMenuListener);
 
     }
 }
