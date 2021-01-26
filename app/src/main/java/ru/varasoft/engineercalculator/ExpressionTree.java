@@ -2,7 +2,7 @@ package ru.varasoft.engineercalculator;
 
 class ExpressionTree<E> extends TreeImpl<E> {
     public final int FORMULA_IS_CORRECT = -1;
-    private StringBuilder expression = new StringBuilder("(456 + 3)//(6555 * 33 - 7) + 88 * 14");
+    private StringBuilder expression = new StringBuilder("(456 + 3)/(6555 * 33 - 7) + 88 * 14");
     private int cursor;
 
     public ExpressionTree(int MAX_DEPTH) {

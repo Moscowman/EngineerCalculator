@@ -5,11 +5,18 @@ import java.util.ArrayList;
 class LexicalAnalyzer {
     private final String inputString;
 
-    public String[] getTokensArray() {
-        return tokensArrayList.toArray(new String[0]);
+    public String[] getTokensStringArray() {
+        ArrayList<String> tokensStringArray = new ArrayList<>();
+        for (int i = 0; i < tokensArrayList.size(); i++) {
+            tokensStringArray.add(tokensArrayList.get(i).getPresentation());
+        }
+        return tokensStringArray.toArray(new String[0]);
     }
 
-    String[] functions = {"_pi","_sin","_cos","_tan","_sqrt","_e"};
+    public Token[] getTokensArray() {
+        return tokensArrayList.toArray(new Token[0]);
+    }
+    String[] functions = {"_pi", "_sin", "_cos", "_tan", "_sqrt", "_e"};
 
 
     private final ArrayList<Token> tokensArrayList = new ArrayList<>();
@@ -28,15 +35,16 @@ class LexicalAnalyzer {
                     break;
                 case '_':
                     boolean found = false;
-                    for (String function: functions) {
+                    for (String function : functions) {
                         if (inputString.regionMatches(currentPosition, function, 0, function.length())) {
                             tokensArrayList.add(new Token(function, currentPosition));
                             found = true;
-                            currentPosition+=function.length();
+                            currentPosition += function.length();
                             break;
                         }
                     }
-                    if (!found) throw new LexicalAnalysisException(String.format("Unexpected symbols starting at %d", currentPosition), currentPosition);
+                    if (!found)
+                        throw new LexicalAnalysisException(String.format("Unexpected symbols starting at %d", currentPosition), currentPosition);
                     break;
                 case '+':
                 case '-':
@@ -44,7 +52,7 @@ class LexicalAnalyzer {
                 case '/':
                 case '(':
                 case ')':
-                    tokensArrayList.add(new Token(inputString.substring(currentPosition,currentPosition + 1), currentPosition));
+                    tokensArrayList.add(new Token(inputString.substring(currentPosition, currentPosition + 1), currentPosition));
                     currentPosition++;
                     break;
                 case '0':
@@ -66,13 +74,17 @@ class LexicalAnalyzer {
                         if (digitsAndPoint.contains(symbolAtPosition)) {
                             if (symbolAtPosition.equals(".")) {
                                 pointsCount++;
-                                if (pointsCount > 1) {break;}
+                                if (pointsCount > 1) {
+                                    break;
+                                }
                             }
-                        } else {break;}
+                        } else {
+                            break;
+                        }
                         position++;
                     }
                     if (pointsCount <= 1) {
-                        tokensArrayList.add(new Token(inputString.substring(currentPosition, position),currentPosition));
+                        tokensArrayList.add(new Token(inputString.substring(currentPosition, position), currentPosition));
                         currentPosition = position;
                         break;
                     } else {

@@ -10,4 +10,8 @@ class Token {
         this.positionInString = positionInString;
         length = presentation.length();
     }
+
+    public String getPresentation() {
+        return presentation;
+    }
 }

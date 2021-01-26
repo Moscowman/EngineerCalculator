@@ -1,165 +1,156 @@
 package ru.varasoft.engineercalculator;
 
-import java.util.HashMap;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 class SyntaxisAnalyzer {
-    private HashMap<String, Double> variables;
 
-    private String inputString;
-
-    private Token[] tokens;
-
-    public SyntaxisAnalyzer() {
-        variables = new HashMap<String, Double>();
-    }
+    private final Token[] tokens;
 
     public SyntaxisAnalyzer(String inputString, Token[] tokens) {
-        this.inputString = inputString;
         this.tokens = tokens;
     }
 
-    public void setVariable(String variableName, Double variableValue) {
-        variables.put(variableName, variableValue);
-    }
-
-    public boolean checkForParenthesisAfterFunctions() {
+    public int checkForParenthesisAfterFunctions() {
+        String[] functions = {"_sin", "_cos", "_tan", "_sqrt"};
         for (int i = 0; i < tokens.length; i++) {
             Token token = tokens[i];
-        }
-        return true;
-    }
-
-    public Double getVariable(String variableName) {
-        if (!variables.containsKey(variableName)) {
-            System.err.println("Error: Try get unexists variable '" + variableName + "'");
-            return 0.0;
-        }
-        return variables.get(variableName);
-    }
-
-    public double Parse(String s) throws Exception {
-        Result result = PlusMinus(s);
-        if (!result.rest.isEmpty()) {
-            System.err.println("Error: can't full parse");
-            System.err.println("rest: " + result.rest);
-        }
-        return result.acc;
-    }
-
-    private Result PlusMinus(String s) throws Exception {
-        Result current = MulDiv(s);
-        double acc = current.acc;
-
-        while (current.rest.length() > 0) {
-            if (!(current.rest.charAt(0) == '+' || current.rest.charAt(0) == '-')) break;
-
-            char sign = current.rest.charAt(0);
-            String next = current.rest.substring(1);
-
-            current = MulDiv(next);
-            if (sign == '+') {
-                acc += current.acc;
-            } else {
-                acc -= current.acc;
+            boolean isFunction = false;
+            for (String function : functions) {
+                if (token.getPresentation().equals(function)) {
+                    isFunction = true;
+                    break;
+                }
+            }
+            if (isFunction && (i == tokens.length - 1 || !tokens[i + 1].getPresentation().equals("("))) {
+                return i;
             }
         }
-        return new Result(acc, current.rest);
+        return -1;
     }
 
-    private Result Bracket(String s) throws Exception {
-        char zeroChar = s.charAt(0);
-        if (zeroChar == '(') {
-            Result r = PlusMinus(s.substring(1));
-            if (!r.rest.isEmpty() && r.rest.charAt(0) == ')') {
-                r.rest = r.rest.substring(1);
-            } else {
-                System.err.println("Error: not close bracket");
-            }
-            return r;
-        }
-        return FunctionVariable(s);
-    }
-
-    private Result FunctionVariable(String s) throws Exception {
-        String f = "";
-        int i = 0;
-        // ищем название функции или переменной
-        // имя обязательно должна начинаться с буквы
-        while (i < s.length() && (Character.isLetter(s.charAt(i)) || (Character.isDigit(s.charAt(i)) && i > 0))) {
-            f += s.charAt(i);
-            i++;
-        }
-        if (!f.isEmpty()) { // если что-нибудь нашли
-            if (s.length() > i && s.charAt(i) == '(') { // и следующий символ скобка значит - это функция
-                Result r = Bracket(s.substring(f.length()));
-                return processFunction(f, r);
-            } else { // иначе - это переменная
-                return new Result(getVariable(f), s.substring(f.length()));
+    public int checkForParenthesesConsistency() {
+        Deque<String> parenthesesStack = new ArrayDeque<>();
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i].getPresentation().equals("(")) {
+                parenthesesStack.push("(");
+            } else if (tokens[i].getPresentation().equals(")")) {
+                if (!parenthesesStack.pop().equals("(")) {
+                    return i;
+                }
             }
         }
-        return Num(s);
-    }
-
-    private Result MulDiv(String s) throws Exception {
-        Result current = Bracket(s);
-
-        double acc = current.acc;
-        while (true) {
-            if (current.rest.length() == 0) {
-                return current;
-            }
-            char sign = current.rest.charAt(0);
-            if ((sign != '*' && sign != '/')) return current;
-
-            String next = current.rest.substring(1);
-            Result right = Bracket(next);
-
-            if (sign == '*') {
-                acc *= right.acc;
-            } else {
-                acc /= right.acc;
-            }
-
-            current = new Result(acc, right.rest);
-        }
-    }
-
-    private Result Num(String s) throws Exception {
-        int i = 0;
-        int dot_cnt = 0;
-        boolean negative = false;
-        // число также может начинаться с минуса
-        if (s.charAt(0) == '-') {
-            negative = true;
-            s = s.substring(1);
-        }
-        while (i < s.length() && (Character.isDigit(s.charAt(i)) || s.charAt(i) == '.')) {
-            if (s.charAt(i) == '.' && ++dot_cnt > 1) {
-                throw new Exception("not valid number '" + s.substring(0, i + 1) + "'");
-            }
-            i++;
-        }
-        if (i == 0) {
-            throw new Exception("can't get valid number in '" + s + "'");
-        }
-
-        double dPart = Double.parseDouble(s.substring(0, i));
-        if (negative) dPart = -dPart;
-        String restPart = s.substring(i);
-
-        return new Result(dPart, restPart);
-    }
-
-    private Result processFunction(String func, Result r) {
-        if (func.equals("_sin")) {
-            return new Result(Math.sin(Math.toRadians(r.acc)), r.rest);
-        } else if (func.equals("_cos")) {
-            return new Result(Math.cos(Math.toRadians(r.acc)), r.rest);
-        } else if (func.equals("_tan")) {
-            return new Result(Math.tan(Math.toRadians(r.acc)), r.rest);
+        if (parenthesesStack.size() == 0) {
+            return -1;
         } else {
-            System.err.println("function '" + func + "' is not defined");
+            return tokens.length;
         }
-        return r;
     }
-} 
+
+    private Token[] subArray(Token[] tokens, int first, int last) {
+        Token[] newTokens = new Token[last - first + 1];
+        if (last + 1 - first >= 0)
+            System.arraycopy(tokens, first, newTokens, 0, last + 1 - first);
+        return newTokens;
+    }
+
+    private int getPriority(Token token) {
+        String presentation = token.getPresentation();
+        if (presentation.equals("+") || presentation.equals("-")) {
+            return 3;
+        }
+        if (presentation.equals("*") || presentation.equals("/")) {
+            return 2;
+        }
+        if (presentation.equals("_sin") || presentation.equals("_cos")
+                || presentation.equals("_tan") || presentation.equals("_sqrt")) {
+            return 1;
+        }
+        if (presentation.equals("(")) {
+            return 0;
+        }
+        return -1;
+    }
+
+    public Node<Token> parse(Token[] tokens) throws Exception {
+        int result = checkForParenthesisAfterFunctions();
+        if (result != -1) return null;
+
+        result = checkForParenthesesConsistency();
+        if (result != -1) return null;
+        return parseRecursive(tokens);
+    }
+
+
+    private Node<Token> parseRecursive(Token[] tokens) throws Exception {
+
+        if (tokens.length == 0) {
+            return null;
+        }
+
+        if (tokens[0].getPresentation().equals("(") && tokens[tokens.length - 1].getPresentation().equals(")")) {
+            return parseRecursive(subArray(tokens, 1, tokens.length - 2));
+        }
+
+        int maxPriority = -1;
+        int position = -1;
+        for (int i = 0; i < tokens.length; i++) {
+            int tokenPriority = getPriority(tokens[i]);
+            if (tokenPriority > maxPriority) {
+                maxPriority = tokenPriority;
+                position = i;
+            }
+            if (tokenPriority == 0) {
+                Deque<String> parenthesesStack = new ArrayDeque<>();
+                int j;
+                for (j = i; j < tokens.length; j++) {
+                    if (tokens[j].getPresentation().equals("(")) {
+                        parenthesesStack.push("(");
+                    } else if (tokens[j].getPresentation().equals(")")) {
+                        parenthesesStack.pop();
+                        if (parenthesesStack.size() == 0) {
+                            break;
+                        }
+                    }
+                }
+                i = j;
+            }
+        }
+
+        if (position == -1) {
+            if (tokens.length > 1) {
+                throw new RuntimeException("Неверная последовательность токенов");
+            } else {
+                Node<Token> node = new Node<>(tokens[0]);
+                return node;
+            }
+        }
+
+        if (maxPriority == 1) {
+            Deque<String> parenthesesStack = new ArrayDeque<>();
+            int j;
+            for (j = position + 1; j < tokens.length; j++) {
+                if (tokens[j].getPresentation().equals("(")) {
+                    parenthesesStack.push("(");
+                } else if (tokens[j].getPresentation().equals(")")) {
+                    parenthesesStack.pop();
+                    if (parenthesesStack.size() == 0) {
+                        break;
+                    }
+                }
+            }
+            Node<Token> node = new Node<>(tokens[position]);
+            node.setLeftChild(parseRecursive(subArray(tokens, position + 2, j - 1)));
+            return node;
+        } else {
+            Node<Token> node = new Node<>(tokens[position]);
+            if (position > 0 && position < tokens.length - 1) {
+                node.setLeftChild(parseRecursive(subArray(tokens, 0, position - 1)));
+            }
+            if (position < tokens.length - 1) {
+                node.setRightChild(parseRecursive(subArray(tokens, position + 1, tokens.length - 1)));
+            }
+            return node;
+        }
+    }
+}
