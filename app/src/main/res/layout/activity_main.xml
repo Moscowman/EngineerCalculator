@@ -7,10 +7,11 @@
     android:background="#505050"
     tools:context=".MainActivity">
 
-    <SurfaceView
-        android:id="@+id/surfaceView"
+    <TextView
+        android:id="@+id/expressionTextView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/surface_height"
+        android:textSize="24sp"
         android:background="@color/design_default_color_on_primary"
         android:backgroundTint="@color/design_default_color_on_primary"
         app:layout_constraintBottom_toTopOf="@id/button_shift"

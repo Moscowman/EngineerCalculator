@@ -5,12 +5,32 @@ import java.math.RoundingMode;
 
 import static java.lang.Math.*;
 
-class ExpressionHelper<E> extends TreeImpl<E> {
-    private StringBuilder expression = new StringBuilder("(456 + 3)/(6555 * 33 - 7) + 88 * 14");
+class ExpressionHelper extends TreeImpl<String> {
+    private StringBuilder expression = new StringBuilder();
     private int cursor;
-    Node root = null;
+    Node<Token> root = null;
 
-    static {
+    public BigDecimal getResult() {
+        return result;
+    }
+
+    private BigDecimal result;
+
+    String[] tokensStringArray;
+
+    private void fillTokensStringArray() {
+        LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer(expression.toString());
+        lexicalAnalyzer.scanInputString();
+        tokensStringArray = lexicalAnalyzer.getTokensStringArray();
+    }
+
+    public StringBuilder getExpression() {
+        fillTokensStringArray();
+        StringBuilder tempBuilder = new StringBuilder();
+        for (String token : tokensStringArray) {
+            tempBuilder.append(token);
+        }
+        return tempBuilder;
     }
 
     public ExpressionHelper(int MAX_DEPTH) {
@@ -31,11 +51,12 @@ class ExpressionHelper<E> extends TreeImpl<E> {
     }
 
     public void clearFormula() {
-        expression.delete(0, expression.length() - 1);
+        expression.delete(0, expression.length());
+        cursor = 0;
     }
 
     public void setCursorToTheEnd() {
-        cursor = expression.length() - 1;
+        cursor = expression.length();
     }
 
     void parseFormula() {
@@ -52,10 +73,15 @@ class ExpressionHelper<E> extends TreeImpl<E> {
 
 
     public BigDecimal calculate() {
+        parseFormula();
         if (root != null) {
             return calculateNode(root);
         }
         return null;
+    }
+
+    public void setResult(BigDecimal result) {
+        this.result = result;
     }
 
     private BigDecimal calculateNode(Node<Token> node) {
@@ -106,11 +132,46 @@ class ExpressionHelper<E> extends TreeImpl<E> {
     }
 
     public void tryToInvertSign() {
+        fillTokensStringArray();
+        if (tokensStringArray.length > 0) {
+            StringBuilder tempBuilder = new StringBuilder();
+            for (int i = 0; i < tokensStringArray.length - 1; i++) {
+                tempBuilder.append(tokensStringArray[i]);
+            }
+            String lastToken = tokensStringArray[tokensStringArray.length - 1];
+            if (lastToken.length() > 1 && ".0123456789".contains(lastToken.substring(0, 1))) {
+                if (tokensStringArray.length == 1 || !tokensStringArray[tokensStringArray.length - 2].equals("-")) {
+                    tempBuilder.append("-");
+                    tempBuilder.append(lastToken);
+                } else {
+                    tempBuilder.deleteCharAt(tempBuilder.length() - 1);
+                    tempBuilder.append(lastToken);
+                }
+            } else {
+                tempBuilder.append(lastToken);
+            }
+            expression = tempBuilder;
+            cursor = expression.length();
+        }
     }
 
     public void tryToPlacePoint() {
+        expression.append(".");
     }
 
     public void backspace() {
+        fillTokensStringArray();
+        if (tokensStringArray.length > 0) {
+            StringBuilder tempBuilder = new StringBuilder();
+            for (int i = 0; i < tokensStringArray.length - 1; i++) {
+                tempBuilder.append(tokensStringArray[i]);
+            }
+            String lastToken = tokensStringArray[tokensStringArray.length - 1];
+            if (!"_()*/+-".contains(lastToken.substring(0, 1))) {
+                tempBuilder.append(lastToken.substring(0, lastToken.length() - 1));
+            }
+            expression = tempBuilder;
+            cursor = expression.length();
+        }
     }
 }

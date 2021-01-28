@@ -8,6 +8,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.math.BigDecimal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,15 +18,16 @@ public class MainActivity extends AppCompatActivity {
 
     private final int REQUEST_CODE_SETTING_ACTIVITY = 1;
 
-    private ExpressionHelper<String> expressionHelper = new ExpressionHelper<String>(255);
+    private ExpressionHelper expressionHelper = new ExpressionHelper(255);
 
-    private ExpressionDrawer expressionDrawer = new ExpressionDrawer();
+    private ExpressionDrawer expressionDrawer;
 
     private final View.OnClickListener digitsListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Button button = (Button) v;
             expressionHelper.addString(button.getText().toString());
+            expressionDrawer.draw();
         }
     };
 
@@ -39,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Button button = (Button) v;
-            expressionHelper.addString(String.format("_%s", button.getText().toString()));
+            expressionHelper.addString(String.format("_%s(", button.getText().toString()));
+            expressionDrawer.draw();
         }
     };
 
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             expressionHelper.clearFormula();
+            expressionDrawer.draw();
         }
     };
 
@@ -54,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             expressionHelper.tryToPlacePoint();
+            expressionDrawer.draw();
+
         }
     };
 
@@ -61,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             expressionHelper.tryToInvertSign();
+            expressionDrawer.draw();
+
         }
     };
 
@@ -68,6 +78,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             expressionHelper.addString("_pi");
+            expressionDrawer.draw();
+
+        }
+    };
+
+    private final View.OnClickListener buttonEListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            expressionHelper.addString("_e");
+            expressionDrawer.draw();
+
         }
     };
 
@@ -75,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             expressionHelper.addString("_sqrt");
+            expressionDrawer.draw();
+
         }
     };
 
@@ -82,14 +105,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             expressionHelper.backspace();
+            expressionDrawer.draw();
         }
     };
 
     private final View.OnClickListener buttonResultListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            expressionHelper.calculate();
-
+            BigDecimal result = expressionHelper.calculate();
+            expressionHelper.setResult(result);
+            expressionDrawer.draw();
         }
     };
 
@@ -112,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView textView = findViewById(R.id.expressionTextView);
+        expressionDrawer = new ExpressionDrawer(textView, expressionHelper);
         initDigitsButtons();
         initFunctionButtons();
         initOtherButtons();
@@ -159,8 +186,6 @@ public class MainActivity extends AppCompatActivity {
         buttonCos.setOnClickListener(functionButtonsListener);
         Button buttonTan = findViewById(R.id.button_tan);
         buttonTan.setOnClickListener(functionButtonsListener);
-        Button button_e = findViewById(R.id.button_e);
-        button_e.setOnClickListener(digitsListener);
     }
 
     private void initOtherButtons() {
@@ -174,12 +199,13 @@ public class MainActivity extends AppCompatActivity {
         buttonPi.setOnClickListener(buttonPiListener);
         Button buttonSqrt = findViewById(R.id.button_sqrt);
         buttonSqrt.setOnClickListener(buttonSqrtListener);
+        Button button_e = findViewById(R.id.button_e);
+        button_e.setOnClickListener(buttonEListener);
         Button buttonResult = findViewById(R.id.button_result);
         buttonResult.setOnClickListener(buttonResultListener);
         Button buttonBackspace = findViewById(R.id.button_backspace);
         buttonBackspace.setOnClickListener(buttonBackspaceListener);
         Button buttonMenu = findViewById(R.id.button_menu);
         buttonMenu.setOnClickListener(buttonMenuListener);
-
     }
 }
