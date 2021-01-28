@@ -2,6 +2,8 @@ package ru.varasoft.engineercalculator;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.*;
 
 /**
@@ -31,14 +33,20 @@ public class LexicalAnalizerUnitTest {
         lexicalAnalyzer.scanInputString();
         assertArrayEquals(new String[] {"5", "+", "(", "_cos","(", "77.33",")", "/", "77", ")"}, lexicalAnalyzer.getTokensStringArray());
         SyntaxisAnalyzer syntaxisAnalyzer = new SyntaxisAnalyzer(inputString, lexicalAnalyzer.getTokensArray());
-        syntaxisAnalyzer.checkForParenthesisAfterFunctions();
-        syntaxisAnalyzer.checkForParenthesesConsistency();
         try {
             Node node = syntaxisAnalyzer.parse(lexicalAnalyzer.getTokensArray());
             System.out.println();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testComplexExpression2() {
+        ExpressionHelper expressionHelper = new ExpressionHelper("(456 + 3)/(6555 * 33 - 7) + 88 * 14");
+        expressionHelper.parseFormula();
+        BigDecimal result = expressionHelper.calculate();
+        System.out.println(result);
     }
 
     @Test(expected = LexicalAnalysisException.class)

@@ -15,14 +15,15 @@ public class MainActivity extends AppCompatActivity {
 
     private final int REQUEST_CODE_SETTING_ACTIVITY = 1;
 
-    private ExpressionTree<String> expressionTree = new ExpressionTree<String>(255);
+    private ExpressionHelper<String> expressionHelper = new ExpressionHelper<String>(255);
+
     private ExpressionDrawer expressionDrawer = new ExpressionDrawer();
 
     private final View.OnClickListener digitsListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Button button = (Button) v;
-            expressionTree.addString(button.getText().toString());
+            expressionHelper.addString(button.getText().toString());
         }
     };
 
@@ -38,56 +39,56 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Button button = (Button) v;
-            expressionTree.addString(String.format("_%s", button.getText().toString()));
+            expressionHelper.addString(String.format("_%s", button.getText().toString()));
         }
     };
 
     private final View.OnClickListener buttonACListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            expressionTree.clearFormula();
+            expressionHelper.clearFormula();
         }
     };
 
     private final View.OnClickListener buttonPointListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            expressionTree.tryToPlacePoint();
+            expressionHelper.tryToPlacePoint();
         }
     };
 
     private final View.OnClickListener buttonPlusMinusListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            expressionTree.tryToInvertSign();
+            expressionHelper.tryToInvertSign();
         }
     };
 
     private final View.OnClickListener buttonPiListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            expressionTree.addString("_pi");
+            expressionHelper.addString("_pi");
         }
     };
 
     private final View.OnClickListener buttonSqrtListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            expressionTree.addString("_sqrt");
+            expressionHelper.addString("_sqrt");
         }
     };
 
     private final View.OnClickListener buttonBackspaceListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            expressionTree.backspace();
+            expressionHelper.backspace();
         }
     };
 
     private final View.OnClickListener buttonResultListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            expressionTree.calculate();
+            expressionHelper.calculate();
 
         }
     };
@@ -102,10 +103,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         blackTheme = prefs.getBoolean("blackTheme", false);
-        if (blackTheme) {setTheme(R.style.DarkTheme_EngineerCalculator);}
-        else {setTheme(R.style.Theme_EngineerCalculator);}
+        if (blackTheme) {
+            setTheme(R.style.DarkTheme_EngineerCalculator);
+        } else {
+            setTheme(R.style.Theme_EngineerCalculator);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initDigitsButtons();

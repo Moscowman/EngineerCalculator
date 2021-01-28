@@ -14,4 +14,8 @@ class Token {
     public String getPresentation() {
         return presentation;
     }
+
+    public int getPositionInString() {
+        return positionInString;
+    }
 }

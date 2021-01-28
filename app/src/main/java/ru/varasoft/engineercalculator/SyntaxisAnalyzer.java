@@ -29,13 +29,13 @@ class SyntaxisAnalyzer {
         return -1;
     }
 
-    public int checkForParenthesesConsistency() {
+    public int checkForParenthesesConsistency(Token[] tokens) {
         Deque<String> parenthesesStack = new ArrayDeque<>();
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i].getPresentation().equals("(")) {
                 parenthesesStack.push("(");
             } else if (tokens[i].getPresentation().equals(")")) {
-                if (!parenthesesStack.pop().equals("(")) {
+                if (parenthesesStack.size() == 0 || !parenthesesStack.pop().equals("(")) {
                     return i;
                 }
             }
@@ -76,7 +76,7 @@ class SyntaxisAnalyzer {
         int result = checkForParenthesisAfterFunctions();
         if (result != -1) return null;
 
-        result = checkForParenthesesConsistency();
+        result = checkForParenthesesConsistency(tokens);
         if (result != -1) return null;
         return parseRecursive(tokens);
     }
@@ -89,12 +89,17 @@ class SyntaxisAnalyzer {
         }
 
         if (tokens[0].getPresentation().equals("(") && tokens[tokens.length - 1].getPresentation().equals(")")) {
-            return parseRecursive(subArray(tokens, 1, tokens.length - 2));
+            Token[] subTokens = subArray(tokens, 1, tokens.length - 2);
+            if (checkForParenthesesConsistency(subTokens) == -1)
+                return parseRecursive(subTokens);
         }
 
-        int maxPriority = -1;
+        int maxPriority = -2;
         int position = -1;
-        for (int i = 0; i < tokens.length; i++) {
+        boolean hasSign = tokens[0].getPresentation().equals("-")
+                || tokens[0].getPresentation().equals("+");
+
+        for (int i = hasSign ? 1 : 0; i < tokens.length; i++) {
             int tokenPriority = getPriority(tokens[i]);
             if (tokenPriority > maxPriority) {
                 maxPriority = tokenPriority;
@@ -115,6 +120,9 @@ class SyntaxisAnalyzer {
                 }
                 i = j;
             }
+            if ("*/+-".contains(tokens[i].getPresentation()) && i < tokens.length - 1 && "+-".contains(tokens[i + 1].getPresentation())) {
+                i++;
+            }
         }
 
         if (position == -1) {
@@ -123,6 +131,16 @@ class SyntaxisAnalyzer {
             } else {
                 Node<Token> node = new Node<>(tokens[0]);
                 return node;
+            }
+        }
+
+        if (hasSign && maxPriority <= 1) {
+            if (tokens[0].getPresentation().equals("-")) {
+                Node<Token> node = new Node<>(new Token("_neg", tokens[0].getPositionInString()));
+                node.setLeftChild(parseRecursive(subArray(tokens, 1, tokens.length - 1)));
+                return node;
+            } else {
+                return parseRecursive(subArray(tokens, 1, tokens.length - 1));
             }
         }
 

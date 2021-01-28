@@ -6,18 +6,18 @@ class ExpressionDrawer {
     private int x = 0;
     private int y = 0;
 
-    ExpressionTree<String> expression;
+    ExpressionHelper<String> expression;
 
-    public ExpressionTree<String> getExpression() {
+    public ExpressionHelper<String> getExpression() {
         return expression;
     }
 
-    public void setExpression(ExpressionTree<String> expression) {
+    public void setExpression(ExpressionHelper<String> expression) {
         this.expression = expression;
     }
 
     public void setFormula(String expressionString) {
-        this.expression = new ExpressionTree<String>(expressionString);
+        this.expression = new ExpressionHelper<String>(expressionString);
     }
 
     public void draw(Canvas canvas) {
