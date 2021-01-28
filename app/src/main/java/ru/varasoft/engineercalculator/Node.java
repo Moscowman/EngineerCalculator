@@ -1,6 +1,6 @@
 package ru.varasoft.engineercalculator;
 
-public class Node<T> {
+class Node<T> {
 
     private final T value;
 
