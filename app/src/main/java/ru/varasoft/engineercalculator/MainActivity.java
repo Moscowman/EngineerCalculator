@@ -1,5 +1,6 @@
 package ru.varasoft.engineercalculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private ExpressionHelper expressionHelper = new ExpressionHelper(255);
 
     private ExpressionDrawer expressionDrawer;
+
+    private final String EXPRESSION_HELPER = "ExpressionHelper";
 
     private final View.OnClickListener digitsListener = new View.OnClickListener() {
         @Override
@@ -127,6 +130,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(EXPRESSION_HELPER, expressionHelper);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         blackTheme = prefs.getBoolean("blackTheme", false);
@@ -138,7 +147,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView textView = findViewById(R.id.expressionTextView);
+        if (savedInstanceState != null) {
+            expressionHelper = savedInstanceState.getParcelable(EXPRESSION_HELPER);
+        }
         expressionDrawer = new ExpressionDrawer(textView, expressionHelper);
+        expressionDrawer.draw();
         initDigitsButtons();
         initFunctionButtons();
         initOtherButtons();

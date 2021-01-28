@@ -1,22 +1,63 @@
 package ru.varasoft.engineercalculator;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static java.lang.Math.*;
 
-class ExpressionHelper extends TreeImpl<String> {
+class ExpressionHelper extends TreeImpl<String> implements Parcelable {
     private StringBuilder expression = new StringBuilder();
+
     private int cursor;
+
     Node<Token> root = null;
+
+    String[] tokensStringArray;
+
+    private BigDecimal result;
+
+    protected ExpressionHelper(Parcel in) {
+        super(255);
+        cursor = in.readInt();
+        expression = new StringBuilder(in.readString());
+        String resultString = in.readString();
+        if (resultString != null) {
+            result = new BigDecimal(resultString);
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(cursor);
+        dest.writeString(expression.toString());
+        if (result != null) {
+            dest.writeString(result.toString());
+        }
+    }
+
+    public static final Creator<ExpressionHelper> CREATOR = new Creator<ExpressionHelper>() {
+        @Override
+        public ExpressionHelper createFromParcel(Parcel in) {
+            return new ExpressionHelper(in);
+        }
+
+        @Override
+        public ExpressionHelper[] newArray(int size) {
+            return new ExpressionHelper[size];
+        }
+    };
 
     public BigDecimal getResult() {
         return result;
     }
-
-    private BigDecimal result;
-
-    String[] tokensStringArray;
 
     private void fillTokensStringArray() {
         LexicalAnalyzer lexicalAnalyzer = new LexicalAnalyzer(expression.toString());
@@ -174,4 +215,6 @@ class ExpressionHelper extends TreeImpl<String> {
             cursor = expression.length();
         }
     }
+
+
 }
