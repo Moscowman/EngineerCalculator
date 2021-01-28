@@ -26,7 +26,7 @@ class LexicalAnalyzer {
         this.inputString = inputString;
     }
 
-    public void scanInputString() throws LexicalAnalysisException {
+    public void scanInputString() throws GrammarAnalysisException {
         int currentPosition = 0;
         while (currentPosition < inputString.length()) {
             switch (inputString.charAt(currentPosition)) {
@@ -44,7 +44,7 @@ class LexicalAnalyzer {
                         }
                     }
                     if (!found)
-                        throw new LexicalAnalysisException(String.format("Unexpected symbols starting at %d", currentPosition), currentPosition);
+                        throw new GrammarAnalysisException(String.format("Unexpected symbols starting at %d", currentPosition), currentPosition);
                     break;
                 case '+':
                 case '-':
@@ -88,10 +88,10 @@ class LexicalAnalyzer {
                         currentPosition = position;
                         break;
                     } else {
-                        throw new LexicalAnalysisException(String.format("Number can not contains more than one point (at position %d)", position), position);
+                        throw new GrammarAnalysisException(String.format("Number can not contains more than one point (at position %d)", position), position);
                     }
                 default:
-                    throw new LexicalAnalysisException(String.format("Unexpected symbols starting at %d", currentPosition), currentPosition);
+                    throw new GrammarAnalysisException(String.format("Unexpected symbols starting at %d", currentPosition), currentPosition);
             }
         }
     }

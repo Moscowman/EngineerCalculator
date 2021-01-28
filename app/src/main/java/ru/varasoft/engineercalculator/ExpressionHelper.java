@@ -2,6 +2,7 @@ package ru.varasoft.engineercalculator;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -16,6 +17,16 @@ class ExpressionHelper extends TreeImpl<String> implements Parcelable {
     Node<Token> root = null;
 
     String[] tokensStringArray;
+
+    String error;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
 
     private BigDecimal result;
 
@@ -94,6 +105,8 @@ class ExpressionHelper extends TreeImpl<String> implements Parcelable {
     public void clearFormula() {
         expression.delete(0, expression.length());
         cursor = 0;
+        error = null;
+        result = null;
     }
 
     public void setCursorToTheEnd() {
@@ -107,8 +120,8 @@ class ExpressionHelper extends TreeImpl<String> implements Parcelable {
         SyntaxisAnalyzer syntaxisAnalyzer = new SyntaxisAnalyzer(inputString, lexicalAnalyzer.getTokensArray());
         try {
             root = syntaxisAnalyzer.parse(lexicalAnalyzer.getTokensArray());
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (GrammarAnalysisException e) {
+            error = e.getMessage();
         }
     }
 

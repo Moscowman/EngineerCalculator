@@ -23,7 +23,7 @@ class SyntaxisAnalyzer {
                 }
             }
             if (isFunction && (i == tokens.length - 1 || !tokens[i + 1].getPresentation().equals("("))) {
-                return i;
+                throw new GrammarAnalysisException(String.format("Inconsistent parenthesis at %d position", i), i);
             }
         }
         return -1;
@@ -36,14 +36,14 @@ class SyntaxisAnalyzer {
                 parenthesesStack.push("(");
             } else if (tokens[i].getPresentation().equals(")")) {
                 if (parenthesesStack.size() == 0 || !parenthesesStack.pop().equals("(")) {
-                    return i;
+                    throw new GrammarAnalysisException(String.format("Inconsistent parenthesis at %d position", i), i);
                 }
             }
         }
         if (parenthesesStack.size() == 0) {
             return -1;
         } else {
-            return tokens.length;
+            throw new GrammarAnalysisException(String.format("Inconsistent parenthesis at %d position", tokens.length), tokens.length);
         }
     }
 
@@ -72,7 +72,7 @@ class SyntaxisAnalyzer {
         return -1;
     }
 
-    public Node<Token> parse(Token[] tokens) throws Exception {
+    public Node<Token> parse(Token[] tokens) throws GrammarAnalysisException {
         int result = checkForParenthesisAfterFunctions();
         if (result != -1) return null;
 
@@ -82,7 +82,7 @@ class SyntaxisAnalyzer {
     }
 
 
-    private Node<Token> parseRecursive(Token[] tokens) throws Exception {
+    private Node<Token> parseRecursive(Token[] tokens) throws GrammarAnalysisException {
 
         if (tokens.length == 0) {
             return null;
@@ -127,7 +127,7 @@ class SyntaxisAnalyzer {
 
         if (position == -1) {
             if (tokens.length > 1) {
-                throw new RuntimeException("Неверная последовательность токенов");
+                throw new GrammarAnalysisException("Ошибка в выражении", 0);
             } else {
                 Node<Token> node = new Node<>(tokens[0]);
                 return node;

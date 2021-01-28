@@ -38,6 +38,14 @@ class ExpressionDrawer {
         if (result != null) {
             string = String.format("%s\n\n= %s", string, result.toPlainString());
         }
+
+        String error = expressionHelper.getError();
+
+        if (error != null) {
+            string = String.format("%s\n\n%s", string, error);
+            expressionHelper.setError(null);
+        }
+
         textView.setText(string);
     }
 }
